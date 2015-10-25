@@ -92,14 +92,14 @@ Ext.define('Jarvus.form.GooglePicker', {
     },
 
     pickerCallback: function(data) {
-        var url = 'nothing';
+        var me = this;
 
         if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-          var doc = data[google.picker.Response.DOCUMENTS][0];
-          url = doc[google.picker.Document.URL];
+            me.fireEvent('picked',{response: data});
         }
-        var message = 'You picked: ' + url;
-        console.log(message);
+        if (data[google.picker.Response.ACTION] == google.picker.Action.CANCEL) {
+            me.fireEvent('cancel',{response: data});
+        }
     }
 
 });
