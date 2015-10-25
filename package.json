@@ -255,13 +255,6 @@
      */
     "requires": [
         "ux"
-    ],
-
-    "js": [
-        {
-            "path": "https://apis.google.com/js/api.js",
-            "remote": true
-        }
-     ]
+    ]
 
 }
