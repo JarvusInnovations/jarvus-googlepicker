@@ -34,7 +34,7 @@ Ext.define('Jarvus.form.GooglePicker', {
         }
 
         if (me.getAuthorizationScope()) {
-            gapi.load('auth', {
+            window.gapi.load('auth', {
                 'callback': Ext.Function.bind(me.onAuthApiLoad,me)
             });
         }
