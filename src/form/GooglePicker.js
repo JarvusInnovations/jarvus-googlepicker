@@ -14,7 +14,8 @@ Ext.define('Jarvus.form.GooglePicker', {
         oauthToken: null,
         authorizationScope: null,
         authorizationImmediate: false,
-        picker: null
+        picker: null,
+        views: []
     },
 
     initialize: function() {
@@ -70,9 +71,15 @@ Ext.define('Jarvus.form.GooglePicker', {
 
     createPicker: function() {
         var me = this,
-            pb = new google.picker.PickerBuilder();
+            pb = new google.picker.PickerBuilder(),
+            views = me.getViews(),
+            viewCount = views.length,
+            i = 0;
 
-        pb.addView(google.picker.ViewId.DOCS);
+        for (; i<viewCount; i++) {
+            pb.addView(google.picker.ViewId[views[i]]);
+        }
+
         pb.setAppId(me.getAppId());
         pb.setOAuthToken(me.getOauthToken());
         pb.setOrigin(window.location.protocol + '//' + window.location.host);
