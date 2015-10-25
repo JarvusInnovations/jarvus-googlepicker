@@ -35,8 +35,15 @@ in the Google Developers Console:
 
         /*
          * If true, login uses "immediate mode", which means that the token is refreshed
-         * behind the scenes, and no UI is shown to the user.
+         * behind the scenes, and no UI is shown to the user
          * defaults to false
          */
-        authorizationImmediate: true
+        authorizationImmediate: true,
+
+        /*
+         * An array of viewIds
+         * see: https://developers.google.com/picker/docs/#otherviews
+         */
+        views: ['DOCS','FOLDERS','PDFS']
+
     });
