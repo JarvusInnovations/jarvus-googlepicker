@@ -19,7 +19,7 @@ Ext.define('Jarvus.form.GooglePicker', {
     },
 
     initialize: function() {
-        this.callParent(arguments); // call the superclass initComponent method
+        this.callParent(arguments);
 
         var me = this,
             clientId = me.getClientId();
@@ -74,10 +74,16 @@ Ext.define('Jarvus.form.GooglePicker', {
             pb = new google.picker.PickerBuilder(),
             views = me.getViews(),
             viewCount = views.length,
-            i = 0;
+            view, i;
 
-        for (; i<viewCount; i++) {
-            pb.addView(google.picker.ViewId[views[i]]);
+        for (i=0; i<viewCount; i++) {
+            view = views[i];
+            if (view === 'DOCS_UPLOAD') {
+                // no ViewId subclass defined for docs upload for some reason
+                pb.addView(new google.picker.DocsUploadView());
+            } else {
+                pb.addView(google.picker.ViewId[view]);
+            }
         }
 
         pb.setAppId(me.getAppId());
