@@ -15,7 +15,8 @@ Ext.define('Jarvus.form.GooglePicker', {
         authorizationScope: null,
         authorizationImmediate: false,
         picker: null,
-        views: []
+        views: [],
+        showImmediately: false
     },
 
     initialize: function() {
@@ -39,10 +40,6 @@ Ext.define('Jarvus.form.GooglePicker', {
                 'callback': Ext.Function.bind(me.onAuthApiLoad,me)
             });
         }
-        else
-        {
-            me.createPicker();
-        }
     },
 
     onAuthApiLoad: function() {
@@ -62,7 +59,9 @@ Ext.define('Jarvus.form.GooglePicker', {
 
         if (authResult && !authResult.error) {
             me.setOauthToken(authResult.access_token);
-            me.createPicker();
+            if (me.getShowImmediately()) {
+                me.createPicker();
+            }
 
             // Un-comment this is you want a link to revoke the token for testing purposes
             //console.log('revoke: https://accounts.google.com/o/oauth2/revoke?token=' + authResult.access_token);
